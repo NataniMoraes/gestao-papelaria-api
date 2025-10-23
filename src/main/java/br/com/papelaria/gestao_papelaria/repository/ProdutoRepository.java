@@ -1,4 +1,4 @@
-//O Repository é uma interface para os métodos de interação com a tabela.
+//O Repository é uma interface para os métodos de interação com a tabela. Interfaces definem "contratos" de métodos, mas não os implementam.
 
 package br.com.papelaria.gestao_papelaria.repository;
 
