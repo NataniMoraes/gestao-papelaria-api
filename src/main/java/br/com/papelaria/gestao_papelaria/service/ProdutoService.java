@@ -20,4 +20,11 @@ public class ProdutoService {
     public List<Produto> listarTodos(){
         return produtoRepository.findAll();
     }
+
+    public void deletarProduto(Long id){
+        if(!produtoRepository.existsById(id)) { //verificar se o produto com o ID existe
+            throw new RuntimeException("Produto não encontrado com id: " + id);
+        }
+        produtoRepository.deleteById(id); //se o produto exite, manda o repositório deletar
+    }
 }
