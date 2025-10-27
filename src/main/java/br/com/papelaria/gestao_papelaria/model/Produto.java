@@ -5,8 +5,8 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Entity //essa classe é uma tabela no banco de dados
-@Table(name = "produtos") //criar a tabela no banco de dados
-@Data //Lombok: atalho para gerar os metedos ...
+@Table(name = "produtos") //criar a tabela no banco de dados -- Por padrão seria criado a tabela Produto=nome igual a classe -- Boas práticas=definir o nome e geralmente no plural
+@Data //Lombok: atalho para gerar os metodos...
 public class Produto {
 
     @Id //Primary Key
