@@ -24,6 +24,12 @@ public class ProdutoController {
         return ResponseEntity.status(201).body(novoProduto);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Produto produtoDetalhes) {
+        Produto produtoAtualizado = produtoService.atualizarProduto(id, produtoDetalhes);
+        return ResponseEntity.ok(produtoAtualizado);
+    }
+
     @GetMapping
     public ResponseEntity<List<Produto>> listarProdutos(){
         return ResponseEntity.ok(produtoService.listarTodos());

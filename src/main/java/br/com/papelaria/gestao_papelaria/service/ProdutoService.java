@@ -21,6 +21,18 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
+    public Produto atualizarProduto(Long id, Produto produtoDetalhes) {
+        Produto produtoExistente = produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado com o id: " + id));
+
+        produtoExistente.setNome(produtoDetalhes.getNome());
+        produtoExistente.setDescricao(produtoDetalhes.getDescricao());
+        produtoExistente.setPreco(produtoDetalhes.getPreco());
+        produtoExistente.setQuantidadeEstoque(produtoDetalhes.getQuantidadeEstoque());
+
+        return produtoRepository.save(produtoExistente);
+    }
+
     public void deletarProduto(Long id){
         if(!produtoRepository.existsById(id)) { //verificar se o produto com o ID existe
             throw new RuntimeException("Produto não encontrado com id: " + id);
