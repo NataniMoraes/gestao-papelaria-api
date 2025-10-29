@@ -1,0 +1,62 @@
+Prova Bimestre 2
+Desenvolvimento de API com Spring Boot
+🎯 Objetivo
+Desenvolver uma API RESTful completa utilizando Spring Boot, aplicando os conceitos aprendidos durante o bimestre, como criação de endpoints, persistência de dados, boas práticas de versionamento e documentação de projeto.
+O aluno deverá escolher um tema livre para o CRUD (por exemplo: cadastro de produtos, alunos, filmes, veículos, etc.), estruturando o projeto de forma organizada e funcional.
+
+⚙️ Requisitos Técnicos
+O projeto deverá conter:
+CRUD completo (Create, Read, Update, Delete) de uma entidade principal.
+Persistência de dados utilizando Spring Data JPA e banco de dados relacional (MySQL).
+Camadas bem definidas: Controller, Service e Repository.
+Validações básicas (ex: campos obrigatórios, formatos válidos, etc.).
+Tratamento de erros adequado (ex: mensagens claras de erro para o cliente).
+README.md completo, contendo:
+Descrição do projeto
+Tecnologias utilizadas
+Passos para execução
+Script SQL de criação do banco de dados
+
+💻 Versionamento e Entregas
+O controle de versão será parte da avaliação. O aluno deverá:
+Criar um repositório no GitHub para o projeto.
+Manter uma branch principal (main).
+Criar branchs semanais (exemplo: semana-1, semana-2, etc.).
+Fazer no mínimo 1 commit por semana.
+Realizar um merge da branch da semana para a main semanalmente.
+⚠️ O histórico de commits e merges será verificado como parte da nota.
+
+🧠 Entrega e Apresentação
+Na data da entrega, o aluno deverá:
+Demonstrar o sistema em funcionamento (endpoints testados no Postman ou Insomnia).
+Explicar brevemente a arquitetura do projeto e as decisões técnicas adotadas.
+O repositório deverá estar público e conter todas as atualizações até a data final.
+
+📅 Cronograma Sugerido
+Semana
+Entregas esperadas
+1
+Criação do projeto Spring Boot e configuração do banco de dados
+2
+Implementação da entidade principal e repositório JPA
+3
+Desenvolvimento dos endpoints e validações
+4
+Testes, ajustes e documentação final (README completo)
+
+🧾 Critérios de Avaliação
+Critério
+Pontuação
+Funcionamento do CRUD (API completa)
+30%
+Estrutura e boas práticas (camadas, validação, tratamento de erros)
+20%
+Documentação e script do banco no README
+20%
+Controle de versão (commits e merges semanais)
+20%
+Apresentação e explicação técnica
+10%
+
+🚀 Dica
+Capriche na organização do código e no README — pense como se fosse um projeto real entregue para um cliente!
