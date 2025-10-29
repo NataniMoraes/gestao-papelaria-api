@@ -1,6 +1,7 @@
 //SERVICE: O service é o cérebro da apliacação, é a parte que orquestre as operações.
 
 package br.com.papelaria.gestao_papelaria.service;
+import br.com.papelaria.gestao_papelaria.exception.ResourceNotFoundException;
 import br.com.papelaria.gestao_papelaria.model.Produto;
 import br.com.papelaria.gestao_papelaria.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ProdutoService {
 
     public Produto atualizarProduto(Long id, Produto produtoDetalhes) {
         Produto produtoExistente = produtoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado com o id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com o id: " + id));
 
         produtoExistente.setNome(produtoDetalhes.getNome());
         produtoExistente.setDescricao(produtoDetalhes.getDescricao());
@@ -35,7 +36,7 @@ public class ProdutoService {
 
     public void deletarProduto(Long id){
         if(!produtoRepository.existsById(id)) { //verificar se o produto com o ID existe
-            throw new RuntimeException("Produto não encontrado com id: " + id);
+            throw new ResourceNotFoundException("Produto não encontrado com id: " + id);
         }
         produtoRepository.deleteById(id); //se o produto exite, manda o repositório deletar
     }
