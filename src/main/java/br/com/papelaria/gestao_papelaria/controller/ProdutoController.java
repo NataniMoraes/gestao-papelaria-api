@@ -43,4 +43,16 @@ public class ProdutoController {
         return ResponseEntity.noContent().build();
     }
 
+    //ESTOQUE
+    @PatchMapping("/{id}/adicionar-estoque")
+    public ResponseEntity<Produto> adicionarEstoque(@PathVariable Long id, @RequestBody Integer quantidade){
+        Produto produtoAtualizado = produtoService.adicionarEstoque(id, quantidade);
+        return ResponseEntity.ok(produtoAtualizado);
+    }
+    @PatchMapping("/{id}/remover-estoque")
+    public ResponseEntity<Produto> removerEstoque(@PathVariable Long id, @RequestBody Integer quantidade){
+        Produto produtoAtualizado = produtoService.removerEstoque(id, quantidade);
+        return ResponseEntity.ok(produtoAtualizado);
+    }
+
 }

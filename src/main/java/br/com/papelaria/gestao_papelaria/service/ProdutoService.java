@@ -7,6 +7,7 @@ import br.com.papelaria.gestao_papelaria.model.Categoria;
 import br.com.papelaria.gestao_papelaria.model.Produto;
 import br.com.papelaria.gestao_papelaria.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -65,5 +66,34 @@ public class ProdutoService {
     public void deletarProduto(Long id) {
         Produto produto = buscarPorId(id);
         produtoRepository.delete(produto);
+    }
+
+    //ESTOQUE
+    public Produto adicionarEstoque(Long id, int quantidade) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("A quantidade a ser adicionada deve ser maior que zero.");
+        }
+
+        Produto produto = buscarPorId(id);
+        int novoEstoque = produto.getQuantidadeEstoque() + quantidade;
+        produto.setQuantidadeEstoque(novoEstoque);
+
+        return produtoRepository.save(produto);
+    }
+
+    public Produto removerEstoque(Long id, int quantidade) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("A quantidade a ser removida deve ser maior que zero.");
+        }
+
+        Produto produto = buscarPorId(id);
+        int novoEstoque = produto.getQuantidadeEstoque() - quantidade;
+
+        if (novoEstoque < 0) {
+            throw new IllegalArgumentException("Estoque insuficiente. Não é possível remover " + quantidade + " unidades.");
+        }
+
+        produto.setQuantidadeEstoque(novoEstoque);
+        return produtoRepository.save(produto);
     }
 }
