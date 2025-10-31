@@ -2,10 +2,12 @@
 
 package br.com.papelaria.gestao_papelaria.controller;
 
+import br.com.papelaria.gestao_papelaria.dto.ProdutoDTO;
 import  br.com.papelaria.gestao_papelaria.model.Produto;
 import br.com.papelaria.gestao_papelaria.service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,14 +21,14 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @PostMapping
-    public ResponseEntity<Produto> criarProduto(@Valid @RequestBody Produto produto){
-        Produto novoProduto = produtoService.criarProduto(produto);
-        return ResponseEntity.status(201).body(novoProduto);
+    public ResponseEntity<Produto> createProduto(@RequestBody ProdutoDTO produtoDTO) {
+        Produto novoProduto = produtoService.criarProduto(produtoDTO);
+        return new ResponseEntity<>(novoProduto, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Produto produtoDetalhes) {
-        Produto produtoAtualizado = produtoService.atualizarProduto(id, produtoDetalhes);
+    public ResponseEntity<Produto> updateProduto(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO) {
+        Produto produtoAtualizado = produtoService.atualizarProduto(id, produtoDTO);
         return ResponseEntity.ok(produtoAtualizado);
     }
 
@@ -36,7 +38,7 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarProduto(@PathVariable Long id){
+    public ResponseEntity<Void> deleteProduto(@PathVariable Long id) {
         produtoService.deletarProduto(id);
         return ResponseEntity.noContent().build();
     }

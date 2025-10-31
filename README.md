@@ -1,4 +1,5 @@
-# API de Gestão de Papelaria
+# API de Gestão de Papelaria 
+## Projeto: Sistema de Gestão "Papelaria Candy" 🍬
 
 API RESTful desenvolvida para o gerenciamento de produtos, vendas e estoque de uma papelaria. Este projeto faz parte da avaliação do segundo bimestre da disciplina de Padrões de Projeto, Frameworks e APIs.
 
