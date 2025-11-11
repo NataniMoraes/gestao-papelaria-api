@@ -37,6 +37,14 @@ public class ProdutoController {
         return ResponseEntity.ok(produtoService.listarTodos());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Produto> getProdutoById(@PathVariable Long id) {
+        Produto produto = produtoService.buscarPorId(id);
+        // O método buscarPorId já lida com o erro 404,
+        // então se o produto for encontrado, podemos apenas retornar OK.
+        return ResponseEntity.ok(produto);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduto(@PathVariable Long id) {
         produtoService.deletarProduto(id);
