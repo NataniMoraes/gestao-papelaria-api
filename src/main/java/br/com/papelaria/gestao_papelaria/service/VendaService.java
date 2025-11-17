@@ -5,7 +5,6 @@ import br.com.papelaria.gestao_papelaria.dto.VendaRequestDTO;
 import br.com.papelaria.gestao_papelaria.model.ItemVenda;
 import br.com.papelaria.gestao_papelaria.model.Produto;
 import br.com.papelaria.gestao_papelaria.model.Venda;
-import br.com.papelaria.gestao_papelaria.repository.ProdutoRepository;
 import br.com.papelaria.gestao_papelaria.repository.VendaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,28 +22,27 @@ public class VendaService {
     private VendaRepository vendaRepository;
 
     @Autowired
-    private ProdutoService produtoService; // Buscar produtos e gerenciar
+    private ProdutoService produtoService;
 
     @Transactional
-    public Venda realizarVenda(VendaRequestDTO vendaRequestDTO){
+    public Venda realizarVenda(VendaRequestDTO vendaRequestDTO) {
         // ---Nova venda---
-        // --Inicialização e lista de itens--
         Venda venda = new Venda();
         venda.setDataVenda(LocalDateTime.now());
         BigDecimal valorTotal = BigDecimal.ZERO;
         List<ItemVenda> itensParaSalvar = new ArrayList<>();
 
         //Carrinho
-        for (ItemVendaDTO itemDTO: vendaRequestDTO.getItens()){
+        for (ItemVendaDTO itemDTO : vendaRequestDTO.getItens()) {
 
             Produto produto = produtoService.buscarPorId(itemDTO.getProdutoId());
 
-            //Buscar produto
-            if(produto.getQuantidadeEstoque() <itemDTO.getQuantidade()){
+            //Verificar estoque
+            if (produto.getQuantidadeEstoque() < itemDTO.getQuantidade()) {
                 throw new IllegalArgumentException("Estoque insuficiente para o produto: " + produto.getNome());
             }
 
-            //Se tiver estoque = criar ItemVenda
+            //Criar ItemVenda
             ItemVenda itemVenda = new ItemVenda();
             itemVenda.setProduto(produto);
             itemVenda.setQuantidade(itemDTO.getQuantidade());
@@ -56,7 +54,7 @@ public class VendaService {
             BigDecimal subtotal = produto.getPreco().multiply(new BigDecimal(itemDTO.getQuantidade()));
             valorTotal = valorTotal.add(subtotal);
 
-            //Baixa
+            //Baixa no estoque
             int novoEstoque = produto.getQuantidadeEstoque() - itemDTO.getQuantidade();
             produto.setQuantidadeEstoque(novoEstoque);
         }
@@ -65,5 +63,9 @@ public class VendaService {
         venda.setItens(itensParaSalvar);
 
         return vendaRepository.save(venda);
+    }
+
+    public List<Venda> listarTodas() {
+        return vendaRepository.findAll();
     }
 }
