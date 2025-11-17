@@ -13,5 +13,5 @@ import java.math.BigDecimal;
 public class DashboardStatsDTO {
     private long totalProdutos;
     private long totalCategorias;
-    private BigDecimal totalVendasValor;
+    private BigDecimal totalCategoria;
 }

@@ -2,7 +2,6 @@ package br.com.papelaria.gestao_papelaria.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,9 +22,7 @@ public class Venda {
     @Column(name = "valor_total", nullable = false)
     private BigDecimal valorTotal;
 
-    // RELACIONAMENTO
-    // Uma Venda pode ter vários Itens de Venda.
-    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
+    // MUDANÇA IMPORTANTE AQUI: fetch = FetchType.EAGER
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ItemVenda> itens = new ArrayList<>();
-
 }

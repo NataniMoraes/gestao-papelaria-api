@@ -21,11 +21,12 @@ public class DashboardService {
         long produtos = produtoRepository.count();
         long categorias = categoriaRepository.count();
 
-        //Calcular o total vendido
+        // Calcular o total vendido
         List<Venda> todasVendas = vendaRepository.findAll();
         BigDecimal totalVendas = todasVendas.stream()
                 .map(Venda::getValorTotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        return  new DashboardStatsDTO(produtos, categorias, totalVendas);
+
+        return new DashboardStatsDTO(produtos, categorias, totalVendas);
     }
 }
