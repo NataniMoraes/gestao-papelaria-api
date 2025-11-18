@@ -36,8 +36,14 @@ API RESTful desenvolvida como parte de um projeto de sistema de gestão, utiliza
 ### 1. Configuração do Banco de Dados
 
 1.  Usando o **DBeaver**, crie um novo banco de dados (schema) no seu MySQL com o nome `gestao_papelaria`.
-2.  Abra o arquivo `src/main/resources/application.properties`.
-3.  Configure suas credenciais de acesso ao MySQL:
+   ```bash
+    -- CRIAR O BANCO DE DADOS
+    CREATE DATABASE IF NOT EXISTS gestao_papelaria
+    CHARACTER SET utf8mb4 -- BANCO IRÁ SUPORTAR ACENTOS
+    COLLATE utf8mb4_unicode_ci; -- BANCO IRÁ SURPORTAR CARACTERES ESPECIAIS
+   ```
+3.  Abra o arquivo `src/main/resources/application.properties`.
+4.  Configure suas credenciais de acesso ao MySQL:
 
     ```properties
     # Configuração para o MySQL
