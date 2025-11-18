@@ -26,23 +26,32 @@ public class VendaService {
 
     @Transactional
     public Venda realizarVenda(VendaRequestDTO vendaRequestDTO) {
-        // ---Nova venda---
+        // --- 1. Inicialização da Venda ---
         Venda venda = new Venda();
         venda.setDataVenda(LocalDateTime.now());
-        BigDecimal valorTotal = BigDecimal.ZERO;
+
+        // Define a forma de pagamento
+        venda.setFormaPagamento(vendaRequestDTO.getFormaPagamento());
+
+        // Define o desconto (se vier nulo, assume zero)
+        BigDecimal desconto = vendaRequestDTO.getDesconto() != null ? vendaRequestDTO.getDesconto() : BigDecimal.ZERO;
+        venda.setDesconto(desconto);
+
+        // Variáveis auxiliares
+        BigDecimal valorTotalItens = BigDecimal.ZERO;
         List<ItemVenda> itensParaSalvar = new ArrayList<>();
 
-        //Carrinho
+        // --- 2. Processamento do Carrinho ---
         for (ItemVendaDTO itemDTO : vendaRequestDTO.getItens()) {
 
             Produto produto = produtoService.buscarPorId(itemDTO.getProdutoId());
 
-            //Verificar estoque
+            // Verificar estoque
             if (produto.getQuantidadeEstoque() < itemDTO.getQuantidade()) {
                 throw new IllegalArgumentException("Estoque insuficiente para o produto: " + produto.getNome());
             }
 
-            //Criar ItemVenda
+            // Criar ItemVenda
             ItemVenda itemVenda = new ItemVenda();
             itemVenda.setProduto(produto);
             itemVenda.setQuantidade(itemDTO.getQuantidade());
@@ -51,17 +60,33 @@ public class VendaService {
 
             itensParaSalvar.add(itemVenda);
 
+            // Soma ao total bruto
             BigDecimal subtotal = produto.getPreco().multiply(new BigDecimal(itemDTO.getQuantidade()));
-            valorTotal = valorTotal.add(subtotal);
+            valorTotalItens = valorTotalItens.add(subtotal);
 
-            //Baixa no estoque
+            // Baixa no estoque
             int novoEstoque = produto.getQuantidadeEstoque() - itemDTO.getQuantidade();
             produto.setQuantidadeEstoque(novoEstoque);
         }
 
-        venda.setValorTotal(valorTotal);
+        // --- 3. Cálculos Finais ---
+
+        // Define os itens na venda
         venda.setItens(itensParaSalvar);
 
+        // Define o Valor Total (Bruto)
+        venda.setValorTotal(valorTotalItens);
+
+        // Calcula o Valor Final (Bruto - Desconto)
+        BigDecimal valorFinal = valorTotalItens.subtract(desconto);
+
+        // Garante que o valor final não seja negativo
+        if (valorFinal.compareTo(BigDecimal.ZERO) < 0) {
+            valorFinal = BigDecimal.ZERO;
+        }
+        venda.setValorFinal(valorFinal);
+
+        // Salva tudo no banco
         return vendaRepository.save(venda);
     }
 
