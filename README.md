@@ -67,7 +67,7 @@ API RESTful desenvolvida como parte de um projeto de sistema de gestão, utiliza
 
 ### 3. Script de Carga (Opcional)
 
-Para testar a API com dados prontos, um script SQL (`data-load-script.sql`) está incluído na raiz deste projeto. Você pode executá-lo no **DBeaver** (após configurar o banco) para popular as tabelas de `categorias` e `produtos` com dados de exemplo.
+Para testar a API com dados prontos, um script SQL (`gestao-papelaria.sql`) está incluído na raiz deste projeto. Você pode executá-lo no **DBeaver** (após configurar o banco) para popular as tabelas de `categorias` e `produtos` com dados de exemplo.
 
 ---
 
