@@ -22,7 +22,16 @@ public class Venda {
     @Column(name = "valor_total", nullable = false)
     private BigDecimal valorTotal;
 
-    // MUDANÇA IMPORTANTE AQUI: fetch = FetchType.EAGER
+    @Column(name = "desconto")
+    private BigDecimal desconto;
+
+    @Column(name = "valor_final")
+    private BigDecimal valorFinal; // Valor Total - Desconto
+
+    @Column(name = "forma_pagamento")
+    private String formaPagamento;
+
+
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ItemVenda> itens = new ArrayList<>();
 }
