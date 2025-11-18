@@ -6,10 +6,15 @@ API RESTful desenvolvida como parte de um projeto de sistema de gestão, utiliza
 
 * **CRUD de Produtos:** Operações completas de Criar, Ler, Atualizar e Deletar produtos.
 * **CRUD de Categorias:** Gerenciamento das categorias de produtos.
+* **Gestão Financeira (Vendas):**
+    * Registro transacional de vendas (`@Transactional`).
+    * Suporte a **Descontos** e diferentes **Formas de Pagamento** (Pix, Crédito, Débito, Dinheiro).
+    * Cálculo automático do valor final e baixa automática no estoque.
+* **Dashboard e Relatórios:** Endpoints para estatísticas em tempo real (Total de Vendas, Produtos Cadastrados) e histórico detalhado de transações.
+* **Segurança e Robustez:** Validações de dados, tratamento de exceções e configuração de CORS para múltiplos clientes.
 * **Relacionamentos:** Uso de `@ManyToOne` para associar Produtos a Categorias.
 * **Padrão DTO:** Utilização de Data Transfer Objects (DTOs) para a criação e atualização de entidades.
 * **Controle de Estoque:** Endpoints `PATCH` dedicados para adicionar e remover itens do estoque.
-* **Lógica de Vendas:** Endpoint `POST` transacional (`@Transactional`) que valida o estoque, registra a venda e dá baixa nos produtos.
 
 ## 🛠️ Tecnologias e Ferramentas Utilizadas
 
@@ -18,7 +23,7 @@ API RESTful desenvolvida como parte de um projeto de sistema de gestão, utiliza
 * **Spring Data JPA** (Hibernate)
 * **MySQL** (Banco de Dados)
 * **Maven** (Gerenciador de Dependências)
-* **Lombok**
+* **Lombok** (Produtividade)
 * **DBeaver** (Gerenciador de Banco de Dados)
 * **Postman** (Ferramenta de Teste de API)
 
