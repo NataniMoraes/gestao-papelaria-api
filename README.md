@@ -114,4 +114,4 @@ Você pode testar todos estes endpoints usando o **Postman** ou uma ferramenta s
 | `POST` | `/vendas` | Realiza uma nova venda (envia `VendaRequestDTO`). |
 
 ## 👤 Autor  
-**Natani Moraes** — Projeto acadêmico (2025)  
+**Natani Moraes** - Projeto acadêmico (2025)  
