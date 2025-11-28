@@ -112,3 +112,6 @@ Você pode testar todos estes endpoints usando o **Postman** ou uma ferramenta s
 | Método | Rota | Função |
 | :--- | :--- | :--- |
 | `POST` | `/vendas` | Realiza uma nova venda (envia `VendaRequestDTO`). |
+
+## 👤 Autor  
+**Natani Moraes** — Projeto acadêmico (2025)  
